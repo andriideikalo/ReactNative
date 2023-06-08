@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
+  Image,
 } from "react-native";
 
 export const KeyboardComponent = () => {
@@ -18,6 +19,15 @@ export const KeyboardComponent = () => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
+          <View style={styles.photoContainer}>
+            <Image
+              style={styles.photo}
+              source={require("../assets/images/photoBG.png")}
+            />
+            <TouchableOpacity style={styles.btn} onPress={() => null}>
+              <Text style={styles.btnText}>додати фото</Text>
+            </TouchableOpacity>
+          </View>
           <Text style={styles.title}>Реєстрація</Text>
           <TextInput placeholder="Логін" style={styles.textInput} />
           <TextInput
@@ -98,6 +108,17 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
+  },
+  photoContainer: {
+    // position: "absolute",
+    marginBottom: 32,
+    marginLeft: 50,
+    marginTop: -100,
+  },
+  photo: {
+    width: 120,
+    height: 120,
+    borderRadius: 16,
   },
 });
 
