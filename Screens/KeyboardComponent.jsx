@@ -45,7 +45,7 @@ export const KeyboardComponent = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
+    setIsPasswordVisible((prevVisible) => !prevVisible);
   };
 
   const handlePasswordChange = (text) => {
@@ -86,12 +86,13 @@ export const KeyboardComponent = () => {
             onFocus={handleFocusEmail}
             onBlur={handleBlurEmail}
           />
-          <View style={styles.passwordContainer}>
+          <View style={styles.passwordInputContainer}>
             <TextInput
               placeholder="Пароль"
               style={[
                 styles.textInput,
                 isFocusedPass && styles.textInputFocused,
+                styles.passwordInput,
               ]}
               secureTextEntry={!isPasswordVisible}
               value={password}
@@ -100,13 +101,18 @@ export const KeyboardComponent = () => {
               onBlur={handleBlurPass}
             />
             <TouchableOpacity
-              style={styles.passwordVisibilityButton}
+              style={styles.passContainer}
               onPress={togglePasswordVisibility}>
-              <Icon
+              <Text
+                name={isPasswordVisible ? "eye" : "eyeo"}
+                style={styles.passText}>
+                Показати
+              </Text>
+              {/* <Icon
                 name={isPasswordVisible ? "eye" : "eyeo"}
                 size={20}
                 color="#000"
-              />
+              /> */}
             </TouchableOpacity>
           </View>
           <View style={styles.btnContainer}>
@@ -205,6 +211,26 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: "transparent",
     padding: 8,
+  },
+  passwordInputContainer: {
+    position: "relative",
+  },
+  passwordInput: {
+    paddingRight: 40,
+  },
+  passContainer: {
+    position: "absolute",
+    top: 16,
+    right: 16,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  passText: {
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#1B4371",
+    fontWeight: "400",
   },
 });
 
