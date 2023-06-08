@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   KeyboardAvoidingView,
@@ -11,8 +11,37 @@ import {
   Keyboard,
   Image,
 } from "react-native";
+import Icon from "react-native-vector-icons/AntDesign";
 
 export const KeyboardComponent = () => {
+  const [isFocusedLogin, setIsFocusedLogin] = useState(false);
+  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
+  const [isFocusedPass, setIsFocusedPass] = useState(false);
+
+  const handleFocusLogin = () => {
+    setIsFocusedLogin(true);
+  };
+
+  const handleBlurLogin = () => {
+    setIsFocusedLogin(false);
+  };
+
+  const handleFocusEmail = () => {
+    setIsFocusedEmail(true);
+  };
+
+  const handleBlurEmail = () => {
+    setIsFocusedEmail(false);
+  };
+
+  const handleFocusPass = () => {
+    setIsFocusedPass(true);
+  };
+
+  const handleBlurPass = () => {
+    setIsFocusedPass(false);
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -22,19 +51,37 @@ export const KeyboardComponent = () => {
           <View style={styles.photoContainer}>
             <Image
               style={styles.photo}
-              source={require("../assets/images/photoBG.png")}
+              source={require("../assets/images/user-avatar.png")}
             />
-            <TouchableOpacity style={styles.btn} onPress={() => null}>
-              <Text style={styles.btnText}>додати фото</Text>
+            <TouchableOpacity style={styles.btnPhoto} onPress={() => null}>
+              <Icon name="pluscircleo" size={30} color="#FF6C00" />
             </TouchableOpacity>
           </View>
           <Text style={styles.title}>Реєстрація</Text>
-          <TextInput placeholder="Логін" style={styles.textInput} />
+          <TextInput
+            placeholder="Логін"
+            style={[
+              styles.textInput,
+              isFocusedLogin && styles.textInputFocused,
+            ]}
+            onFocus={handleFocusLogin}
+            onBlur={handleBlurLogin}
+          />
           <TextInput
             placeholder="Адреса електронної пошти"
-            style={styles.textInput}
+            style={[
+              styles.textInput,
+              isFocusedEmail && styles.textInputFocused,
+            ]}
+            onFocus={handleFocusEmail}
+            onBlur={handleBlurEmail}
           />
-          <TextInput placeholder="Пароль" style={styles.textInput} />
+          <TextInput
+            placeholder="Пароль"
+            style={[styles.textInput, isFocusedPass && styles.textInputFocused]}
+            onFocus={handleFocusPass}
+            onBlur={handleBlurPass}
+          />
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.btn} onPress={() => null}>
               <Text style={styles.btnText}>Зареєстуватися</Text>
@@ -81,6 +128,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
     borderRadius: 8,
   },
+  textInputFocused: {
+    borderColor: "#FF6C00",
+    borderWidth: 1,
+  },
   btnContainer: {
     marginTop: 12,
   },
@@ -101,7 +152,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 16,
   },
-
   futer: {
     fontSize: 16,
     fontWeight: "400",
@@ -110,15 +160,24 @@ const styles = StyleSheet.create({
     color: "#1B4371",
   },
   photoContainer: {
-    // position: "absolute",
-    marginBottom: 32,
-    marginLeft: 50,
+    position: "relative",
     marginTop: -100,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   photo: {
     width: 120,
     height: 120,
     borderRadius: 16,
+    backgroundColor: "#F6F6F6",
+  },
+  btnPhoto: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    backgroundColor: "transparent",
+    padding: 8,
   },
 });
 

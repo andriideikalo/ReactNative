@@ -15,7 +15,6 @@ export const RegistrationScreen = () => {
       <ImageBackground
         style={[styles.image, { width, height }]}
         source={require("../assets/images/photoBG.png")}></ImageBackground>
-      <Text>Open up App.js to start working on your app!</Text>
       <KeyboardComponent />
     </View>
   );
