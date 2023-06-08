@@ -17,6 +17,8 @@ export const KeyboardComponent = () => {
   const [isFocusedLogin, setIsFocusedLogin] = useState(false);
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
   const [isFocusedPass, setIsFocusedPass] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [password, setPassword] = useState("");
 
   const handleFocusLogin = () => {
     setIsFocusedLogin(true);
@@ -40,6 +42,14 @@ export const KeyboardComponent = () => {
 
   const handleBlurPass = () => {
     setIsFocusedPass(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
   };
 
   return (
@@ -76,12 +86,29 @@ export const KeyboardComponent = () => {
             onFocus={handleFocusEmail}
             onBlur={handleBlurEmail}
           />
-          <TextInput
-            placeholder="Пароль"
-            style={[styles.textInput, isFocusedPass && styles.textInputFocused]}
-            onFocus={handleFocusPass}
-            onBlur={handleBlurPass}
-          />
+          <View style={styles.passwordContainer}>
+            <TextInput
+              placeholder="Пароль"
+              style={[
+                styles.textInput,
+                isFocusedPass && styles.textInputFocused,
+              ]}
+              secureTextEntry={!isPasswordVisible}
+              value={password}
+              onChangeText={handlePasswordChange}
+              onFocus={handleFocusPass}
+              onBlur={handleBlurPass}
+            />
+            <TouchableOpacity
+              style={styles.passwordVisibilityButton}
+              onPress={togglePasswordVisibility}>
+              <Icon
+                name={isPasswordVisible ? "eye" : "eyeo"}
+                size={20}
+                color="#000"
+              />
+            </TouchableOpacity>
+          </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.btn} onPress={() => null}>
               <Text style={styles.btnText}>Зареєстуватися</Text>
