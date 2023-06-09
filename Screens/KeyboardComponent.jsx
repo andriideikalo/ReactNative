@@ -124,7 +124,7 @@ export const KeyboardComponent = () => {
           <View style={styles.futerContainer}>
             <Text style={styles.futer}>Вже є акаунт? </Text>
             <TouchableOpacity onPress={() => null}>
-              <Text style={styles.futer}>Увійти</Text>
+              <Text style={styles.futerLink}>Увійти</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -142,7 +142,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     backgroundColor: "#FFFFFF",
-    borderRadius: 25,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     position: "absolute",
     left: 0,
     right: 0,
@@ -191,6 +192,14 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
+  },
+  futerLink: {
+    fontSize: 16,
+    fontWeight: "400",
+    lineHeight: 19,
+    textAlign: "center",
+    color: "#1B4371",
+    textDecorationLine: "underline",
   },
   photoContainer: {
     position: "relative",
