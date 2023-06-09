@@ -12,7 +12,7 @@ import {
   Keyboard,
   Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 export const LoginScreen = () => {
@@ -22,6 +22,7 @@ export const LoginScreen = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
@@ -46,6 +47,26 @@ export const LoginScreen = () => {
   const handlePasswordChange = (text) => {
     setPassword(text);
   };
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setIsKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setIsKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -56,7 +77,8 @@ export const LoginScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.inner}>
+          <View
+            style={[styles.inner, isKeyboardVisible && styles.innerKeyboard]}>
             <Text style={styles.title}>Увійти</Text>
             <TextInput
               placeholder="Адреса електронної пошти"
@@ -124,12 +146,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     backgroundColor: "#FFFFFF",
-    borderRadius: 25,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
     gap: 16,
+  },
+  innerKeyboard: {
+    bottom: -130,
   },
   title: {
     fontSize: 30,

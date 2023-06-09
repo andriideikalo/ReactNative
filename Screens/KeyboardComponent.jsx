@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   KeyboardAvoidingView,
@@ -21,6 +21,7 @@ export const KeyboardComponent = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
   const handleFocusLogin = () => {
     setIsFocusedLogin(true);
@@ -53,13 +54,33 @@ export const KeyboardComponent = () => {
   const handlePasswordChange = (text) => {
     setPassword(text);
   };
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setIsKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setIsKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "position" : "height"}
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
+        <View style={[styles.inner, isKeyboardVisible && styles.innerKeyboard]}>
           <View style={styles.photoContainer}>
             <Image
               style={styles.photo}
@@ -110,11 +131,6 @@ export const KeyboardComponent = () => {
                 style={styles.passText}>
                 Показати
               </Text>
-              {/* <Icon
-                name={isPasswordVisible ? "eye" : "eyeo"}
-                size={20}
-                color="#000"
-              /> */}
             </TouchableOpacity>
           </View>
           <View style={styles.btnContainer}>
@@ -151,6 +167,9 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     gap: 16,
+  },
+  innerKeyboard: {
+    bottom: -130,
   },
   title: {
     fontSize: 30,
