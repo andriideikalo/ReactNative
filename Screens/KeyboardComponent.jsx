@@ -22,6 +22,8 @@ export const KeyboardComponent = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleFocusLogin = () => {
     setIsFocusedLogin(true);
@@ -75,6 +77,26 @@ export const KeyboardComponent = () => {
     };
   }, []);
 
+  const handleLoginChange = (text) => {
+    setLogin(text);
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+  };
+
+  const handleRegistration = () => {
+    const userData = {
+      login,
+      email,
+      password,
+    };
+    console.log(userData);
+    setLogin("");
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "position" : "height"}
@@ -97,6 +119,8 @@ export const KeyboardComponent = () => {
               styles.textInput,
               isFocusedLogin && styles.textInputFocused,
             ]}
+            value={login}
+            onChangeText={handleLoginChange}
             onFocus={handleFocusLogin}
             onBlur={handleBlurLogin}
           />
@@ -106,6 +130,8 @@ export const KeyboardComponent = () => {
               styles.textInput,
               isFocusedEmail && styles.textInputFocused,
             ]}
+            value={email}
+            onChangeText={handleEmailChange}
             onFocus={handleFocusEmail}
             onBlur={handleBlurEmail}
           />
@@ -134,7 +160,7 @@ export const KeyboardComponent = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.btn} onPress={() => null}>
+            <TouchableOpacity style={styles.btn} onPress={handleRegistration}>
               <Text style={styles.btnText}>Зареєстуватися</Text>
             </TouchableOpacity>
           </View>
