@@ -13,7 +13,7 @@ import {
   Image,
 } from "react-native";
 import React, { useState } from "react";
-import Icon from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginScreen = () => {
   const { width, height } = Dimensions.get("window");
@@ -21,6 +21,7 @@ export const LoginScreen = () => {
   const [isFocusedPass, setIsFocusedPass] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
@@ -98,7 +99,8 @@ export const LoginScreen = () => {
 
             <View style={styles.futerContainer}>
               <Text style={styles.futer}>Немає акаунту? </Text>
-              <TouchableOpacity onPress={() => null}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Registration")}>
                 <Text style={styles.futerLink}>Зареєструватися</Text>
               </TouchableOpacity>
             </View>

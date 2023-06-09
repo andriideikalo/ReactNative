@@ -12,6 +12,7 @@ import {
   Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 
 export const KeyboardComponent = () => {
   const [isFocusedLogin, setIsFocusedLogin] = useState(false);
@@ -19,6 +20,7 @@ export const KeyboardComponent = () => {
   const [isFocusedPass, setIsFocusedPass] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const handleFocusLogin = () => {
     setIsFocusedLogin(true);
@@ -123,7 +125,7 @@ export const KeyboardComponent = () => {
 
           <View style={styles.futerContainer}>
             <Text style={styles.futer}>Вже є акаунт? </Text>
-            <TouchableOpacity onPress={() => null}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
               <Text style={styles.futerLink}>Увійти</Text>
             </TouchableOpacity>
           </View>
