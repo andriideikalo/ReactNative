@@ -23,6 +23,7 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
@@ -68,6 +69,20 @@ export const LoginScreen = () => {
     };
   }, []);
 
+  const handleEmailChange = (text) => {
+    setEmail(text);
+  };
+
+  const handleRegistration = () => {
+    const userData = {
+      email,
+      password,
+    };
+    console.log(userData);
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -86,6 +101,8 @@ export const LoginScreen = () => {
                 styles.textInput,
                 isFocusedEmail && styles.textInputFocused,
               ]}
+              value={email}
+              onChangeText={handleEmailChange}
               onFocus={handleFocusEmail}
               onBlur={handleBlurEmail}
             />
@@ -114,7 +131,7 @@ export const LoginScreen = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.btnContainer}>
-              <TouchableOpacity style={styles.btn} onPress={() => null}>
+              <TouchableOpacity style={styles.btn} onPress={handleRegistration}>
                 <Text style={styles.btnText}>Увійти</Text>
               </TouchableOpacity>
             </View>
