@@ -99,7 +99,7 @@ export const KeyboardComponent = () => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "position" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={[styles.inner, isKeyboardVisible && styles.innerKeyboard]}>
