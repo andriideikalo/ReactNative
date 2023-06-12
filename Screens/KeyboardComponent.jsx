@@ -24,6 +24,7 @@ export const KeyboardComponent = () => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleFocusLogin = () => {
     setIsFocusedLogin(true);
@@ -91,6 +92,12 @@ export const KeyboardComponent = () => {
       email,
       password,
     };
+    if (login && email && password) {
+      setIsLoggedIn(true);
+      navigation.navigate("HomeScreen", { userData });
+    } else {
+      console.log("Не введено логін або пароль");
+    }
     console.log(userData);
     setLogin("");
     setEmail("");
