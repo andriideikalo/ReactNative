@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
 
 export const KeyboardComponent = () => {
   const [isFocusedLogin, setIsFocusedLogin] = useState(false);
@@ -108,10 +109,18 @@ export const KeyboardComponent = () => {
     setPassword("");
   };
 
-  const handleSelectPhoto = () => {
-    // Добавьте свою логику для выбора фотографии с устройства
-    // Когда у вас будет URI выбранной фотографии, установите его с помощью setPhotoUri
-    setPhotoUri(photoUriFromDevice);
+  const handleSelectPhoto = async () => {
+    // Запросите разрешение у пользователя на доступ к фотографиям устройства
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      // Если доступ не разрешен, обработайте это по вашему усмотрению
+      return;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync();
+    if (!result.cancelled) {
+      // Если фотография была выбрана, установите ее URI с помощью setPhotoUri
+      setPhotoUri(result.uri);
+    }
   };
 
   return (
@@ -129,7 +138,9 @@ export const KeyboardComponent = () => {
                   : require("../assets/images/user-avatar.png")
               }
             />
-            <TouchableOpacity style={styles.btnPhoto} onPress={() => null}>
+            <TouchableOpacity
+              style={styles.btnPhoto}
+              onPress={handleSelectPhoto}>
               <Icon name="pluscircleo" size={30} color="#FF6C00" />
             </TouchableOpacity>
           </View>
