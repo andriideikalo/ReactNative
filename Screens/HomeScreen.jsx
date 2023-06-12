@@ -6,22 +6,21 @@ export const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userData } = route.params;
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.containerBG}>
-        <View style={styles.container}>
-          <View style={styles.containerTitle}>
-            <Text style={styles.title}>Публікації</Text>
-          </View>
-          <View style={styles.containerImage}>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Image
-                style={styles.image}
-                source={require("../assets/images/log-out.png")}
-              />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.containerTitle}>
+          <Text style={styles.title}>Публікації</Text>
+        </View>
+        <View style={styles.containerImage}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Image
+              style={styles.image}
+              source={require("../assets/images/log-out.png")}
+            />
+          </TouchableOpacity>
         </View>
       </View>
+
       <View style={styles.containerCard}>
         {userData.photo ? (
           <Image style={styles.cardPhoto} source={{ uri: userData.photo }} />
@@ -36,28 +35,25 @@ export const HomeScreen = ({ route }) => {
           <Text style={styles.cardEmail}>{userData.email}</Text>
         </View>
       </View>
-      <View style={{ flex: 1 }}>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => {
-              null;
-            }}>
-            <Text style={styles.btnText}>+</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.btnContainer}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
+            null;
+          }}>
+          <Text style={styles.btnText}>+</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  containerBG: {
-    backgroundColor: "#FFFFFF",
-  },
-
   container: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+  containerBG: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -76,7 +72,6 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   containerTitle: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 44,
