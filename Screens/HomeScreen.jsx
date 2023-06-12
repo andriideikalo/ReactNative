@@ -23,8 +23,29 @@ export const HomeScreen = ({ route }) => {
         </View>
       </View>
       <View style={styles.containerCard}>
-        <Text style={styles.cardLogin}>{userData.login}</Text>
-        <Text style={styles.cardEmail}>{userData.email}</Text>
+        {userData.photo ? (
+          <Image style={styles.cardPhoto} source={{ uri: userData.photo }} />
+        ) : (
+          <Image
+            style={styles.cardPhoto}
+            source={require("../assets/images/user-avatar.png")}
+          />
+        )}
+        <View>
+          <Text style={styles.cardLogin}>{userData.login}</Text>
+          <Text style={styles.cardEmail}>{userData.email}</Text>
+        </View>
+      </View>
+      <View style={{ flex: 1 }}>
+        <View style={styles.btnContainer}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              null;
+            }}>
+            <Text style={styles.btnText}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -78,8 +99,10 @@ const styles = StyleSheet.create({
     height: 24,
   },
   containerCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
     marginTop: 100,
-    width: 171,
     height: 60,
     backgroundColor: "#FFFFFF",
   },
@@ -94,6 +117,34 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "700",
     lineHeight: 15,
+  },
+  cardPhoto: {
+    width: 60,
+    height: 60,
+    borderRadius: 16,
+  },
+  btnContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  btn: {
+    backgroundColor: "#FF6C00",
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 13,
+    paddingHorizontal: 13,
+    width: 70,
+    alignSelf: "center",
+  },
+  btnText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "400",
   },
 });
 

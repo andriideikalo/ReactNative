@@ -22,9 +22,11 @@ export const KeyboardComponent = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [photo, setPhoto] = useState("");
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [photoUri, setPhotoUri] = useState(null);
 
   const handleFocusLogin = () => {
     setIsFocusedLogin(true);
@@ -88,6 +90,7 @@ export const KeyboardComponent = () => {
 
   const handleRegistration = () => {
     const userData = {
+      photo: photoUri,
       login,
       email,
       password,
@@ -99,9 +102,16 @@ export const KeyboardComponent = () => {
       console.log("Не введено логін або пароль");
     }
     console.log(userData);
+    setPhoto("");
     setLogin("");
     setEmail("");
     setPassword("");
+  };
+
+  const handleSelectPhoto = () => {
+    // Добавьте свою логику для выбора фотографии с устройства
+    // Когда у вас будет URI выбранной фотографии, установите его с помощью setPhotoUri
+    setPhotoUri(photoUriFromDevice);
   };
 
   return (
@@ -113,7 +123,11 @@ export const KeyboardComponent = () => {
           <View style={styles.photoContainer}>
             <Image
               style={styles.photo}
-              source={require("../assets/images/user-avatar.png")}
+              source={
+                photoUri
+                  ? { uri: photoUri }
+                  : require("../assets/images/user-avatar.png")
+              }
             />
             <TouchableOpacity style={styles.btnPhoto} onPress={() => null}>
               <Icon name="pluscircleo" size={30} color="#FF6C00" />
