@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
+import { HomeScreen } from "./Screens/HomeScreen";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,18 @@ export default function App() {
           options={{ headerShown: false }}
           name="Login"
           component={LoginScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            // headerTitle: "Публікації",
+            // headerStyle: {
+            //   ,
+            // },
+            //
+          }}
+          name="HomeScreen"
+          component={HomeScreen}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />

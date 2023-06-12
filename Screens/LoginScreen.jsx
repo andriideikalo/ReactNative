@@ -24,6 +24,7 @@ export const LoginScreen = () => {
   const navigation = useNavigation();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [email, setEmail] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
@@ -78,6 +79,12 @@ export const LoginScreen = () => {
       email,
       password,
     };
+    if (email && password) {
+      setIsLoggedIn(true);
+      navigation.navigate("HomeScreen");
+    } else {
+      console.log("Не введено логін або пароль");
+    }
     console.log(userData);
     setEmail("");
     setPassword("");
