@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   containerTitle: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 44,
