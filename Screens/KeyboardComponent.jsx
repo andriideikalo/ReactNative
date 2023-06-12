@@ -23,7 +23,6 @@ export const KeyboardComponent = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-  const [photo, setPhoto] = useState("");
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -103,23 +102,26 @@ export const KeyboardComponent = () => {
       console.log("Не введено логін або пароль");
     }
     console.log(userData);
-    setPhoto("");
+    setPhotoUri("");
     setLogin("");
     setEmail("");
     setPassword("");
   };
 
   const handleSelectPhoto = async () => {
-    // Запросите разрешение у пользователя на доступ к фотографиям устройства
+    // Запит на доступ до фото
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      // Если доступ не разрешен, обработайте это по вашему усмотрению
       return;
     }
-    const result = await ImagePicker.launchImageLibraryAsync();
-    if (!result.cancelled) {
-      // Если фотография была выбрана, установите ее URI с помощью setPhotoUri
-      setPhotoUri(result.uri);
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setPhotoUri(result.assets[0].uri);
     }
   };
 
