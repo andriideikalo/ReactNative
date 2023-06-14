@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export const HomeScreen = ({ route }) => {
+export const ProfileScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userData } = route.params;
   return (
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default ProfileScreen;

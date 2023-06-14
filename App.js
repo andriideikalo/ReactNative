@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { HomeScreen } from "./Screens/HomeScreen";
+import { ProfileScreen } from "./Screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,14 @@ export default function App() {
           }}
           name="HomeScreen"
           component={HomeScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            headerTitle: "Створити публікацію",
+          }}
+          name="ProfileScreen"
+          component={ProfileScreen}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />
