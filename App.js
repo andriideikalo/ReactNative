@@ -6,6 +6,7 @@ import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { HomeScreen } from "./Screens/HomeScreen";
 import { ProfileScreen } from "./Screens/ProfileScreen";
+import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,14 @@ export default function App() {
           }}
           name="ProfileScreen"
           component={ProfileScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            headerTitle: "Створити публікацію",
+          }}
+          name="CreatePostsScreen"
+          component={CreatePostsScreen}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />
