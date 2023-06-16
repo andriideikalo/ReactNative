@@ -1,7 +1,42 @@
-import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Text,
+  TextInput,
+} from "react-native";
 
 export const CreatePostsScreen = () => {
+  const [isFocusedName, setIsFocusedName] = useState(false);
+  const [name, setName] = useState("");
+  const [isFocusedLocality, setIsFocusedLocality] = useState(false);
+  const [locality, setLocality] = useState("");
+
+  const handleFocusName = () => {
+    setIsFocusedName(true);
+  };
+
+  const handleBlurName = () => {
+    setIsFocusedName(false);
+  };
+
+  const handleNameChange = (text) => {
+    setName(text);
+  };
+  const handleFocusLocality = () => {
+    setIsFocusedLocality(true);
+  };
+
+  const handleBlurLocality = () => {
+    setIsFocusedLocality(false);
+  };
+
+  const handleLocalityChange = (text) => {
+    setLocality(text);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.photoContainer}>
@@ -11,6 +46,34 @@ export const CreatePostsScreen = () => {
         />
       </View>
       <Text style={styles.placeholderPhoto}>Завантажте фото</Text>
+      <TextInput
+        placeholder="Назва..."
+        style={[styles.textInput, isFocusedName && styles.textInputFocused]}
+        value={name}
+        onChangeText={handleNameChange}
+        onFocus={handleFocusName}
+        onBlur={handleBlurName}
+      />
+      <TextInput
+        placeholder="Місцевість ..."
+        style={[
+          styles.locationInput,
+          isFocusedLocality && styles.textInputFocused,
+        ]}
+        value={locality}
+        onChangeText={handleLocalityChange}
+        onFocus={handleFocusLocality}
+        onBlur={handleBlurLocality}
+      />
+      <View style={styles.btnContainerAddPhoto}>
+        <TouchableOpacity
+          style={styles.btnAddPhoto}
+          onPress={() => {
+            null;
+          }}>
+          <Text style={styles.btnText}>Опублікувати</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.btn}
@@ -137,6 +200,40 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 35,
     textAlign: "left",
+    color: "#BDBDBD",
+  },
+  textInput: {
+    padding: 16,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 8,
+  },
+  textInputFocused: {
+    borderColor: "#FF6C00",
+    borderWidth: 1,
+  },
+  locationInput: {
+    marginTop: 16,
+    padding: 16,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 8,
+  },
+  locationInputFocused: {
+    borderColor: "#FF6C00",
+    borderWidth: 1,
+  },
+  btnContainerAddPhoto: {
+    marginTop: 32,
+  },
+  btnAddPhoto: {
+    backgroundColor: "#FF6C00",
+    borderRadius: 100,
+    alignItems: "center",
+    paddingVertical: 12,
+  },
+  btnText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "400",
   },
 });
 
