@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
-import { HomeScreen } from "./Screens/HomeScreen";
+import { HomeScreen } from "./Screens/PostsScreen";
 import { ProfileScreen } from "./Screens/ProfileScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 
@@ -33,8 +33,8 @@ export default function App() {
             // },
             //
           }}
-          name="HomeScreen"
-          component={HomeScreen}
+          name="PostsScreen"
+          component={PostsScreen}
         />
         <Stack.Screen
           options={{
