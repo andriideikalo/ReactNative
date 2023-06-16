@@ -1,47 +1,23 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
-export const CreatePostsScreen = ({ route }) => {
-  const navigation = useNavigation();
-  const { userData } = route.params;
+export const CreatePostsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.containerBG}>
-        <View style={styles.containerTitle}>
-          <Text style={styles.title}>Публікації</Text>
-        </View>
-        <View style={styles.containerImage}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Image
-              style={styles.image}
-              source={require("../assets/images/log-out.png")}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <View style={styles.containerBG}></View>
 
-      <View style={styles.containerCard}>
-        {userData.photo ? (
-          <Image style={styles.cardPhoto} source={{ uri: userData.photo }} />
-        ) : (
-          <Image
-            style={styles.cardPhoto}
-            source={require("../assets/images/user-avatar.png")}
-          />
-        )}
-        <View>
-          <Text style={styles.cardLogin}>{userData.login}</Text>
-          <Text style={styles.cardEmail}>{userData.email}</Text>
-        </View>
-      </View>
+      <View style={styles.containerCard}></View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.btn}
           onPress={() => {
             null;
           }}>
-          <Text style={styles.btnText}>+</Text>
+          <Image
+            style={styles.btnImage}
+            source={require("../assets/images/trash.png")}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -90,7 +66,7 @@ const styles = StyleSheet.create({
     marginRight: 16,
     marginTop: 44,
   },
-  image: {
+  btnImage: {
     width: 24,
     height: 24,
   },
@@ -128,7 +104,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   btn: {
-    backgroundColor: "#FF6C00",
+    backgroundColor: "#F6F6F6",
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
@@ -136,11 +112,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 13,
     width: 70,
     alignSelf: "center",
-  },
-  btnText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "400",
   },
 });
 

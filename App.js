@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
 import { PostsScreen } from "./Screens/PostsScreen";
-import { ProfileScreen } from "./Screens/ProfileScreen";
+// import { ProfileScreen } from "./Screens/ProfileScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 
 const Stack = createStackNavigator();
@@ -36,17 +36,17 @@ export default function App() {
           name="PostsScreen"
           component={PostsScreen}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           options={{
             headerShown: false,
             headerTitle: "Створити публікацію",
           }}
           name="ProfileScreen"
           component={ProfileScreen}
-        />
+        /> */}
         <Stack.Screen
           options={{
-            headerShown: false,
+            // headerShown: false,
             headerTitle: "Створити публікацію",
           }}
           name="CreatePostsScreen"

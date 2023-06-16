@@ -36,23 +36,27 @@ export const PostsScreen = ({ route }) => {
         </View>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity
+          onPress={() => {
+            null;
+          }}>
           <Image
             style={styles.image}
-            source={require("../assets/images/log-out.png")}
+            source={require("../assets/images/grid.png")}
           />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
+          onPress={() => navigation.navigate("CreatePostsScreen")}>
+          <Text style={styles.btnText}>+</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           onPress={() => {
             null;
           }}>
-          <Text style={styles.btnText}>+</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <Image
             style={styles.image}
-            source={require("../assets/images/log-out.png")}
+            source={require("../assets/images/user.png")}
           />
         </TouchableOpacity>
       </View>
@@ -131,14 +135,16 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 16,
   },
-  // btnContainer: {
-  //   position: "absolute",
-  //   bottom: 0,
-  //   left: 0,
-  //   right: 0,
-  //   alignItems: "center",
-  //   marginBottom: 16,
-  // },
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    position: "absolute",
+    bottom: 0,
+    left: 89,
+    right: 89,
+    alignItems: "center",
+    marginBottom: 16,
+  },
   btn: {
     backgroundColor: "#FF6C00",
     borderRadius: 100,
