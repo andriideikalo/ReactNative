@@ -1,13 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-// import { useNavigation } from "@react-navigation/native";
+import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 
 export const CreatePostsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.containerBG}></View>
-
-      <View style={styles.containerCard}></View>
+      <View style={styles.photoContainer}>
+        <Image
+          style={styles.photoIcons}
+          source={require("../assets/images/notPhoto.png")}
+        />
+      </View>
+      <Text style={styles.placeholderPhoto}>Завантажте фото</Text>
       <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.btn}
@@ -28,6 +31,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   containerBG: {
     flexDirection: "row",
@@ -112,6 +117,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 13,
     width: 70,
     alignSelf: "center",
+  },
+  photoIcons: {
+    width: 60,
+    height: 60,
+  },
+  photoContainer: {
+    width: "100%",
+    height: 240,
+    backgroundColor: "#E8E8E8",
+    position: "relative",
+    marginTop: 32,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  placeholderPhoto: {
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 35,
+    textAlign: "left",
   },
 });
 
