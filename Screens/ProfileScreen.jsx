@@ -61,6 +61,27 @@ export const ProfileScreen = ({ route }) => {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+      <View style={styles.btnContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("PostsScreen", { userData })}>
+          <Image
+            style={styles.icon}
+            source={require("../assets/images/grid.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={() => null}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/user_wite.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("CreatePostsScreen", { userData })
+          }>
+          <Text style={styles.btnText}>+</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -123,5 +144,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 16,
+  },
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    position: "absolute",
+    bottom: 0,
+    left: 89,
+    right: 89,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  btn: {
+    backgroundColor: "#FF6C00",
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 13,
+    paddingHorizontal: 13,
+    width: 70,
+    alignSelf: "center",
+  },
+  btnText: {
+    fontSize: 16,
+    fontWeight: "400",
   },
 });

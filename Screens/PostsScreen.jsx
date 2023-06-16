@@ -37,7 +37,7 @@ export const PostsScreen = ({ route }) => {
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ProfileScreen", { userData })}>
+          onPress={() => navigation.navigate("PostsScreen", { userData })}>
           <Image
             style={styles.image}
             source={require("../assets/images/grid.png")}
