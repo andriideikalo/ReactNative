@@ -81,7 +81,7 @@ export const LoginScreen = () => {
     };
     if (email && password) {
       setIsLoggedIn(true);
-      navigation.navigate("HomeScreen", { userData });
+      navigation.navigate("PostsScreen", { userData });
     } else {
       console.log("Не введено логін або пароль");
     }

@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+// import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
-import { HomeScreen } from "./Screens/PostsScreen";
+import { PostsScreen } from "./Screens/PostsScreen";
 import { ProfileScreen } from "./Screens/ProfileScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 

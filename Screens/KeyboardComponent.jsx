@@ -97,7 +97,7 @@ export const KeyboardComponent = () => {
     };
     if (login && email && password) {
       setIsLoggedIn(true);
-      navigation.navigate("HomeScreen", { userData });
+      navigation.navigate("PostsScreen", { userData });
     } else {
       console.log("Не введено логін або пароль");
     }
