@@ -36,12 +36,22 @@ export const ProfileScreen = ({ route }) => {
         </View>
       </View>
       <View style={styles.btnContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate("ProfileScreen")}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/grid.png")}
+          />
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => {
-            null;
-          }}>
+          onPress={() => navigation.navigate("CreatePostsScreen")}>
           <Text style={styles.btnText}>+</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("ProfileScreen")}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/user.png")}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -120,10 +130,12 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     position: "absolute",
     bottom: 0,
-    left: 0,
-    right: 0,
+    left: 89,
+    right: 89,
     alignItems: "center",
     marginBottom: 16,
   },
