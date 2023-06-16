@@ -36,7 +36,11 @@ export default function App() {
           name="PostsScreen"
           component={PostsScreen}
         />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="ProfileScreen"
+          component={ProfileScreen}
+        />
         <Stack.Screen
           options={{
             // headerShown: false,

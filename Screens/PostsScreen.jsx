@@ -11,10 +11,10 @@ export const PostsScreen = ({ route }) => {
         <View style={styles.containerTitle}>
           <Text style={styles.title}>Публікації</Text>
         </View>
-        <View style={styles.containerImage}>
+        <View style={styles.containerIcon}>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Image
-              style={styles.image}
+              style={styles.icon}
               source={require("../assets/images/log-out.png")}
             />
           </TouchableOpacity>
@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     paddingHorizontal: 49,
   },
-  containerImage: {
+  containerIcon: {
     alignItems: "flex-end",
     marginRight: 16,
     marginTop: 44,
   },
-  image: {
+  icon: {
     width: 24,
     height: 24,
   },
