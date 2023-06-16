@@ -54,17 +54,24 @@ export const CreatePostsScreen = () => {
         onFocus={handleFocusName}
         onBlur={handleBlurName}
       />
-      <TextInput
-        placeholder="Місцевість ..."
+      <View
         style={[
-          styles.locationInput,
-          isFocusedLocality && styles.textInputFocused,
-        ]}
-        value={locality}
-        onChangeText={handleLocalityChange}
-        onFocus={handleFocusLocality}
-        onBlur={handleBlurLocality}
-      />
+          styles.containerMap,
+          isFocusedLocality && styles.containerMapFocused,
+        ]}>
+        <Image
+          style={styles.icon}
+          source={require("../assets/images/map-pin.png")}
+        />
+        <TextInput
+          placeholder="Місцевість ..."
+          style={[styles.locationInput]}
+          value={locality}
+          onChangeText={handleLocalityChange}
+          onFocus={handleFocusLocality}
+          onBlur={handleBlurLocality}
+        />
+      </View>
       <View style={styles.btnContainerAddPhoto}>
         <TouchableOpacity
           style={styles.btnAddPhoto}
@@ -212,15 +219,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   locationInput: {
-    marginTop: 16,
-    padding: 16,
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
+    // flex: 1,
+    // marginTop: 16,
+    // padding: 16,
+    // backgroundColor: "#F6F6F6",
+    // borderRadius: 8,
   },
-  locationInputFocused: {
-    borderColor: "#FF6C00",
-    borderWidth: 1,
-  },
+
   btnContainerAddPhoto: {
     marginTop: 32,
   },
@@ -234,6 +239,18 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "400",
+  },
+  containerMap: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 16,
+    padding: 16,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 8,
+  },
+  containerMapFocused: {
+    borderColor: "#FF6C00",
+    borderWidth: 1,
   },
 });
 

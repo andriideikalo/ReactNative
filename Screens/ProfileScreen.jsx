@@ -5,7 +5,6 @@ import {
   ImageBackground,
   Dimensions,
   KeyboardAvoidingView,
-  TextInput,
   Platform,
   TouchableWithoutFeedback,
   TouchableOpacity,
