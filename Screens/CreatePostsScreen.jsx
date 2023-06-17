@@ -221,7 +221,6 @@ const styles = StyleSheet.create({
   locationInput: {
     // flex: 1,
     // marginTop: 16,
-    // padding: 16,
   },
 
   btnContainerAddPhoto: {
