@@ -223,7 +223,6 @@ const styles = StyleSheet.create({
     // marginTop: 16,
     // padding: 16,
     // backgroundColor: "#F6F6F6",
-    // borderRadius: 8,
   },
 
   btnContainerAddPhoto: {
