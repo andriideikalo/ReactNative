@@ -222,7 +222,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     // marginTop: 16,
     // padding: 16,
-    // backgroundColor: "#F6F6F6",
   },
 
   btnContainerAddPhoto: {
