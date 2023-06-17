@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
   },
   locationInput: {
     // flex: 1,
-    // marginTop: 16,
   },
 
   btnContainerAddPhoto: {
