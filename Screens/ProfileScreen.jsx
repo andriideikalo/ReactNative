@@ -44,7 +44,6 @@ export const ProfileScreen = ({ route }) => {
                 )}
                 <View style={styles.textContainer}>
                   <Text style={styles.cardLogin}>{userData.login}</Text>
-                  {/* <View style={styles.iconContainer}> */}
                   <TouchableOpacity
                     style={styles.iconContainer}
                     onPress={() => navigation.navigate("Login")}>
@@ -53,7 +52,6 @@ export const ProfileScreen = ({ route }) => {
                       source={require("../assets/images/log-out.png")}
                     />
                   </TouchableOpacity>
-                  {/* </View> */}
                 </View>
               </View>
             </View>
