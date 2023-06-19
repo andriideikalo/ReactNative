@@ -29,8 +29,7 @@ export default function App() {
             // headerTitle: "Публікації",
             // headerStyle: {
             //   ,
-            // },
-            //
+           
           }}
           name="PostsScreen"
           component={PostsScreen}
