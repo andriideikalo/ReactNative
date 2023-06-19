@@ -27,9 +27,6 @@ export default function App() {
           options={{
             headerShown: false,
             // headerTitle: "Публікації",
-            // headerStyle: {
-            //   ,
-           
           }}
           name="PostsScreen"
           component={PostsScreen}
