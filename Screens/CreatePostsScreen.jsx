@@ -96,13 +96,16 @@ export const CreatePostsScreen = ({ navigation }) => {
       quality: 1,
     });
     if (!result.canceled) {
-      setPhotoCard(result.uri);
+      setPhotoCard(result.assets[0].uri);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type} ref={setCameraRef}>
+      <Camera
+        style={[styles.camera, photoCard && styles.cameraHiden]}
+        type={type}
+        ref={setCameraRef}>
         <View style={styles.photoView}>
           <TouchableOpacity
             style={styles.flipContainer}
@@ -124,7 +127,7 @@ export const CreatePostsScreen = ({ navigation }) => {
               if (cameraRef) {
                 const { uri } = await cameraRef.takePictureAsync();
                 await MediaLibrary.createAssetAsync(uri);
-                setPhotoCard(uri); // Фиксируем фото в контейнере камеры
+                setPhotoCard(uri); // фіксуємо фото в контейнері камери
               }
             }}>
             <View style={styles.takePhotoOut}>
@@ -134,10 +137,27 @@ export const CreatePostsScreen = ({ navigation }) => {
         </View>
       </Camera>
       {photoCard ? (
-        <Image style={styles.photoCard} source={{ uri: photoCard }} />
+        <View>
+          <Image style={styles.photoCard} source={{ uri: photoCard }} />
+          <TouchableOpacity onPress={handleSelectPhoto}>
+            <Text
+              style={[
+                styles.placeholderPhoto,
+                photoCard && styles.placeholderHiden,
+              ]}>
+              Завантажте фото
+            </Text>
+          </TouchableOpacity>
+        </View>
       ) : (
         <TouchableOpacity onPress={handleSelectPhoto}>
-          <Text style={styles.placeholderPhoto}>Завантажте фото</Text>
+          <Text
+            style={[
+              styles.placeholderPhoto,
+              photoCard && styles.placeholderHiden,
+            ]}>
+            Завантажте фото
+          </Text>
         </TouchableOpacity>
       )}
       <TextInput
@@ -191,6 +211,8 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
   camera: { flex: 1 },
+  cameraHiden: { display: "none" },
+
   photoView: {
     flex: 1,
     backgroundColor: "transparent",
@@ -233,6 +255,13 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     textAlign: "left",
     color: "#BDBDBD",
+  },
+  placeholderHiden: {
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 35,
+    textAlign: "left",
+    opacity: 0,
   },
   textInput: {
     padding: 16,
