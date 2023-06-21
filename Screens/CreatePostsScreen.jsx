@@ -48,15 +48,15 @@ export const CreatePostsScreen = ({ navigation }) => {
       locality,
     };
     if (photoCard && name && locality) {
-      setIsLoggedIn(true);
-      navigation.navigate("PostsScreen", { photoCard: cardPhoto });
-    } else if (setPhotoCard && setName && setLocality) {
-      console.log("Не заповнено всі поля або відсутнє фото");
+      // setIsLoggedIn(true);
+      // navigation.navigate("PostsScreen", { photoCard: cardPhoto });
+      console.log(cardPhoto);
+      setPhotoCard("");
+      setName("");
+      setLocality("");
+    } else if (!photoCard.photoUri && !name && !locality) {
+      console.log("Заповніть всі поля та додайте фото");
     }
-    console.log(cardPhoto);
-    setPhotoCard("");
-    setName("");
-    setLocality("");
   };
 
   const handleSelectPhoto = async () => {
