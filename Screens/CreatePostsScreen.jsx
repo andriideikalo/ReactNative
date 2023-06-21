@@ -131,15 +131,15 @@ export const CreatePostsScreen = ({ navigation }) => {
               }
             }}>
             <View style={styles.takePhotoOut}>
-              <View style={styles.takePhotoInnernewPhoto}>
-                <Image
+              <View style={styles.takePhotoInner}>
+                {/* <Image
                   style={[styles.photoIcons, photoCard && styles.newPhoto]}
                   source={
                     photoCard
                       ? { uri: photoCard }
                       : require("../assets/images/notPhoto.png")
                   }
-                />
+                /> */}
               </View>
             </View>
           </TouchableOpacity>
