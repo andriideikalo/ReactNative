@@ -47,10 +47,10 @@ export const CreatePostsScreen = ({ navigation }) => {
       name,
       locality,
     };
-    if (photoCard && photoCard.photoUri && name && locality) {
+    if (photoCard && name && locality) {
       setIsLoggedIn(true);
       navigation.navigate("PostsScreen", { photoCard: cardPhoto });
-    } else {
+    } else if (setPhotoCard && setName && setLocality) {
       console.log("Не заповнено всі поля або відсутнє фото");
     }
     console.log(cardPhoto);
