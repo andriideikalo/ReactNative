@@ -7,12 +7,15 @@ import {
   Text,
   TextInput,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
-export const CreatePostsScreen = () => {
+export const CreatePostsScreen = ({ navigation }) => {
   const [isFocusedName, setIsFocusedName] = useState(false);
   const [name, setName] = useState("");
   const [isFocusedLocality, setIsFocusedLocality] = useState(false);
   const [locality, setLocality] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [photoCard, setPhotoCard] = useState(null);
 
   const handleFocusName = () => {
     setIsFocusedName(true);
@@ -25,6 +28,7 @@ export const CreatePostsScreen = () => {
   const handleNameChange = (text) => {
     setName(text);
   };
+
   const handleFocusLocality = () => {
     setIsFocusedLocality(true);
   };
@@ -37,13 +41,54 @@ export const CreatePostsScreen = () => {
     setLocality(text);
   };
 
+  const handleCardPhoto = () => {
+    const cardPhoto = {
+      photo: photoCard,
+      name,
+      locality,
+    };
+    if (photoCard && photoCard.photoUri && name && locality) {
+      setIsLoggedIn(true);
+      navigation.navigate("PostsScreen", { photoCard: cardPhoto });
+    } else {
+      console.log("Не заповнено всі поля або відсутнє фото");
+    }
+    console.log(cardPhoto);
+    setPhotoCard("");
+    setName("");
+    setLocality("");
+  };
+
+  const handleSelectPhoto = async () => {
+    // Запит на доступ до фото
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      return;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.cancelled) {
+      setPhotoCard(result.uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.photoContainer}>
-        <Image
-          style={styles.photoIcons}
-          source={require("../assets/images/notPhoto.png")}
-        />
+        <TouchableOpacity onPress={handleSelectPhoto}>
+          <Image
+            style={styles.photoIcons}
+            source={
+              photoCard
+                ? { uri: photoCard }
+                : require("../assets/images/notPhoto.png")
+            }
+          />
+        </TouchableOpacity>
       </View>
       <Text style={styles.placeholderPhoto}>Завантажте фото</Text>
       <TextInput
@@ -73,20 +118,12 @@ export const CreatePostsScreen = () => {
         />
       </View>
       <View style={styles.btnContainerAddPhoto}>
-        <TouchableOpacity
-          style={styles.btnAddPhoto}
-          onPress={() => {
-            null;
-          }}>
+        <TouchableOpacity style={styles.btnAddPhoto} onPress={handleCardPhoto}>
           <Text style={styles.btnText}>Опублікувати</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            null;
-          }}>
+        <TouchableOpacity style={styles.btn} onPress={() => null}>
           <Image
             style={styles.btnImage}
             source={require("../assets/images/trash.png")}
