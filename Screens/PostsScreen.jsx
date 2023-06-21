@@ -22,7 +22,7 @@ export const PostsScreen = ({ route }) => {
       </View>
 
       <View style={styles.containerCard}>
-        {userData.photo ? (
+        {userData && userData.photo ? (
           <Image style={styles.cardPhoto} source={{ uri: userData.photo }} />
         ) : (
           <Image
@@ -37,7 +37,13 @@ export const PostsScreen = ({ route }) => {
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("PostsScreen", { userData })}>
+          onPress={() =>
+            navigation.navigate(
+              "PostsScreen",
+              { userData },
+              console.log(userData)
+            )
+          }>
           <Image
             style={styles.image}
             source={require("../assets/images/grid.png")}
@@ -45,7 +51,13 @@ export const PostsScreen = ({ route }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => navigation.navigate("CreatePostsScreen")}>
+          onPress={() =>
+            navigation.navigate(
+              "CreatePostsScreen",
+              { userData },
+              console.log(userData)
+            )
+          }>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
         <TouchableOpacity

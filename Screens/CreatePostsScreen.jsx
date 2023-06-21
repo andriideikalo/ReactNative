@@ -10,14 +10,17 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import { useNavigation } from "@react-navigation/native";
 
-export const CreatePostsScreen = ({ navigation }) => {
+export const CreatePostsScreen = ({ route }) => {
+  const { userData } = route.params;
   const [isFocusedName, setIsFocusedName] = useState(false);
   const [name, setName] = useState("");
   const [isFocusedLocality, setIsFocusedLocality] = useState(false);
   const [locality, setLocality] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [photoCard, setPhotoCard] = useState(null);
+  const navigation = useNavigation();
   // підключення камери
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
@@ -67,20 +70,21 @@ export const CreatePostsScreen = ({ navigation }) => {
 
   const handleCardPhoto = () => {
     const cardPhoto = {
-      photo: photoCard,
+      photoCard: photoCard,
       name,
       locality,
     };
     if (photoCard && name && locality) {
       // setIsLoggedIn(true);
-      // navigation.navigate("PostsScreen", { photoCard: cardPhoto });
+      navigation.navigate("PostsScreen", { userData }, { cardPhoto });
+      console.log(userData);
       console.log(cardPhoto);
-      setPhotoCard(null);
-      setName("");
-      setLocality("");
     } else if (!photoCard && !name && !locality) {
       console.log("Заповніть всі поля та додайте фото");
     }
+    setPhotoCard(null);
+    setName("");
+    setLocality("");
   };
 
   const handleSelectPhoto = async () => {
