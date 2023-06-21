@@ -75,10 +75,10 @@ export const CreatePostsScreen = ({ navigation }) => {
       // setIsLoggedIn(true);
       // navigation.navigate("PostsScreen", { photoCard: cardPhoto });
       console.log(cardPhoto);
-      setPhotoCard("");
+      setPhotoCard(null);
       setName("");
       setLocality("");
-    } else if (!photoCard.photoUri && !name && !locality) {
+    } else if (!photoCard && !name && !locality) {
       console.log("Заповніть всі поля та додайте фото");
     }
   };
@@ -96,16 +96,12 @@ export const CreatePostsScreen = ({ navigation }) => {
       quality: 1,
     });
     if (!result.canceled) {
-      setPhotoCard(result.assets[0].uri);
+      setPhotoCard(result.uri);
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.photoContainer}> */}
-      {/* <TouchableOpacity
-        style={styles.photoContainer}
-        onPress={handleSelectPhoto}> */}
       <Camera style={styles.camera} type={type} ref={setCameraRef}>
         <View style={styles.photoView}>
           <TouchableOpacity
@@ -128,6 +124,7 @@ export const CreatePostsScreen = ({ navigation }) => {
               if (cameraRef) {
                 const { uri } = await cameraRef.takePictureAsync();
                 await MediaLibrary.createAssetAsync(uri);
+                setPhotoCard(uri); // Фиксируем фото в контейнере камеры
               }
             }}>
             <View style={styles.takePhotoOut}>
@@ -136,25 +133,13 @@ export const CreatePostsScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </Camera>
-      {/* <Image
-          style={[styles.photoIcons, photoCard && styles.newPhoto]}
-          source={
-            photoCard
-              ? { uri: photoCard }
-              : require("../assets/images/notPhoto.png")
-          }
-        /> */}
-      {/* </TouchableOpacity> */}
-      {/* </View> */}
-      <TouchableOpacity onPress={handleSelectPhoto}>
-        <Text
-          style={[
-            styles.placeholderPhoto,
-            photoCard && styles.placeholderHiden,
-          ]}>
-          Завантажте фото
-        </Text>
-      </TouchableOpacity>
+      {photoCard ? (
+        <Image style={styles.photoCard} source={{ uri: photoCard }} />
+      ) : (
+        <TouchableOpacity onPress={handleSelectPhoto}>
+          <Text style={styles.placeholderPhoto}>Завантажте фото</Text>
+        </TouchableOpacity>
+      )}
       <TextInput
         placeholder="Назва..."
         style={[styles.textInput, isFocusedName && styles.textInputFocused]}
@@ -205,110 +190,39 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  containerBG: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-    height: 88,
-    position: "absolute",
-    left: 0,
-    right: 0,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 0.5,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 1,
-    elevation: 1,
-  },
-  containerTitle: {
+  camera: { flex: 1 },
+  photoView: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 44,
+    backgroundColor: "transparent",
+    justifyContent: "flex-end",
   },
-  title: {
-    color: "#212121",
-    fontSize: 17,
-    fontWeight: "500",
-    lineHeight: 22,
-    paddingVertical: 11,
-    paddingHorizontal: 49,
+  flipContainer: {
+    flex: 0.1,
+    alignSelf: "flex-end",
   },
-  containerImage: {
-    alignItems: "flex-end",
-    marginRight: 16,
-    marginTop: 44,
-  },
-  btnImage: {
-    width: 24,
-    height: 24,
-  },
-  containerCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginTop: 100,
-    height: 60,
-    backgroundColor: "#FFFFFF",
-  },
-  cardLogin: {
-    color: "#212121",
-    fontSize: 13,
-    fontWeight: "700",
-    lineHeight: 15,
-  },
-  cardEmail: {
-    color: "#212121",
-    fontSize: 13,
-    fontWeight: "700",
-    lineHeight: 15,
-  },
-  cardPhoto: {
-    width: 60,
-    height: 60,
-    borderRadius: 16,
-  },
-  btnContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  btn: {
-    backgroundColor: "#F6F6F6",
-    borderRadius: 100,
+  button: { alignSelf: "center" },
+  takePhotoOut: {
+    borderWidth: 2,
+    borderColor: "white",
+    height: 50,
+    width: 50,
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 13,
-    paddingHorizontal: 13,
-    width: 70,
-    alignSelf: "center",
+    borderRadius: 50,
   },
-  photoIcons: {
-    width: 60,
-    height: 60,
+  takePhotoInner: {
+    borderWidth: 2,
+    borderColor: "white",
+    height: 40,
+    width: 40,
+    backgroundColor: "white",
+    borderRadius: 50,
   },
-  photoContainer: {
+  photoCard: {
     width: "100%",
     height: 240,
-    backgroundColor: "#E8E8E8",
-    position: "relative",
     marginTop: 32,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  newPhoto: {
-    width: "100%",
-    height: 240,
-    backgroundColor: "#E8E8E8",
-    position: "relative",
-    // marginTop: 32,
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -319,13 +233,6 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     textAlign: "left",
     color: "#BDBDBD",
-  },
-  placeholderHiden: {
-    fontSize: 16,
-    fontWeight: "500",
-    lineHeight: 35,
-    textAlign: "left",
-    opacity: 0,
   },
   textInput: {
     padding: 16,
@@ -339,7 +246,18 @@ const styles = StyleSheet.create({
   locationInput: {
     // flex: 1,
   },
-
+  containerMap: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 16,
+    padding: 16,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 8,
+  },
+  containerMapFocused: {
+    borderColor: "#FF6C00",
+    borderWidth: 1,
+  },
   btnContainerAddPhoto: {
     marginTop: 32,
   },
@@ -353,51 +271,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "400",
-  },
-  containerMap: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 16,
-    padding: 16,
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
-  },
-  containerMapFocused: {
-    borderColor: "#FF6C00",
-    borderWidth: 1,
-  },
-  camera: { flex: 1 },
-  photoView: {
-    flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "flex-end",
-  },
-
-  flipContainer: {
-    flex: 0.1,
-    alignSelf: "flex-end",
-  },
-
-  button: { alignSelf: "center" },
-
-  takePhotoOut: {
-    borderWidth: 2,
-    borderColor: "white",
-    height: 50,
-    width: 50,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 50,
-  },
-
-  takePhotoInner: {
-    borderWidth: 2,
-    borderColor: "white",
-    height: 40,
-    width: 40,
-    backgroundColor: "white",
-    borderRadius: 50,
   },
 });
 
