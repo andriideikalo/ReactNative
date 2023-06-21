@@ -79,6 +79,13 @@ export const CreatePostsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.photoContainer}>
+        <Image
+          source={
+            photoCard
+              ? { uri: photoCard }
+              : require("../assets/images/notPhoto.png")
+          }
+        />
         <TouchableOpacity onPress={handleSelectPhoto}>
           <Image
             style={styles.photoIcons}
