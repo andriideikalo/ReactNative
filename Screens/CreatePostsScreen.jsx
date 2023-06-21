@@ -71,33 +71,31 @@ export const CreatePostsScreen = ({ navigation }) => {
       aspect: [4, 3],
       quality: 1,
     });
-    if (!result.cancelled) {
-      setPhotoCard(result.uri);
+    if (!result.canceled) {
+      setPhotoCard(result.assets[0].uri);
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.photoContainer}>
+      {/* <View style={styles.photoContainer}> */}
+      <TouchableOpacity
+        style={styles.photoContainer}
+        onPress={handleSelectPhoto}>
         <Image
+          style={[styles.photoIcons, photoCard && styles.newPhoto]}
           source={
             photoCard
               ? { uri: photoCard }
               : require("../assets/images/notPhoto.png")
           }
         />
-        <TouchableOpacity onPress={handleSelectPhoto}>
-          <Image
-            style={styles.photoIcons}
-            source={
-              photoCard
-                ? { uri: photoCard }
-                : require("../assets/images/notPhoto.png")
-            }
-          />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.placeholderPhoto}>Завантажте фото</Text>
+      </TouchableOpacity>
+      {/* </View> */}
+      <Text
+        style={[styles.placeholderPhoto, photoCard && styles.placeholderHiden]}>
+        Завантажте фото
+      </Text>
       <TextInput
         placeholder="Назва..."
         style={[styles.textInput, isFocusedName && styles.textInputFocused]}
@@ -246,12 +244,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  newPhoto: {
+    width: "100%",
+    height: 240,
+    backgroundColor: "#E8E8E8",
+    position: "relative",
+    // marginTop: 32,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   placeholderPhoto: {
     fontSize: 16,
     fontWeight: "500",
     lineHeight: 35,
     textAlign: "left",
     color: "#BDBDBD",
+  },
+  placeholderHiden: {
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 35,
+    textAlign: "left",
+    opacity: 0,
   },
   textInput: {
     padding: 16,
