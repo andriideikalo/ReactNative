@@ -6,6 +6,7 @@ import { LoginScreen } from "./Screens/LoginScreen";
 import { PostsScreen } from "./Screens/PostsScreen";
 import { ProfileScreen } from "./Screens/ProfileScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
+import { MapScreen } from "./Screens/MapScreen";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,16 @@ export default function App() {
           }}
           name="CreatePostsScreen"
           component={CreatePostsScreen}
+        />
+        <Stack.Screen
+          options={
+            {
+              // headerShown: false,
+              // headerTitle: "Створити публікацію",
+            }
+          }
+          name="MapScreen"
+          component={MapScreen}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />

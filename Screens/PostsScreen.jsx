@@ -25,7 +25,9 @@ export const PostsScreen = ({ route }) => {
                 source={require("../assets/images/shape.png")}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconLocation}>
+            <TouchableOpacity
+              style={styles.iconLocation}
+              onPress={() => navigation.navigate("MapScreen")}>
               <Image
                 style={styles.icon}
                 source={require("../assets/images/map-pin.png")}
