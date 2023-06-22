@@ -5,6 +5,24 @@ import { useNavigation } from "@react-navigation/native";
 export const PostsScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userData } = route.params;
+  const { cardPhoto } = route.params;
+  const itemCard = () => {
+    if (cardPhoto) {
+      return (
+        <View style={styles.containerCard}>
+          <Image
+            style={styles.photoCard}
+            source={{ uri: cardPhoto.photoCard }}
+          />
+          <View>
+            <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
+            <Text style={styles.cardEmail}>{cardPhoto.locality}</Text>
+          </View>
+        </View>
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.containerBG}>
@@ -20,7 +38,6 @@ export const PostsScreen = ({ route }) => {
           </TouchableOpacity>
         </View>
       </View>
-
       <View style={styles.containerCard}>
         {userData && userData.photo ? (
           <Image style={styles.cardPhoto} source={{ uri: userData.photo }} />
@@ -35,12 +52,14 @@ export const PostsScreen = ({ route }) => {
           <Text style={styles.cardEmail}>{userData.email}</Text>
         </View>
       </View>
+
       <View style={styles.btnContainer}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(
               "PostsScreen",
               { userData },
+              { cardPhoto },
               console.log(userData)
             )
           }>
@@ -55,13 +74,16 @@ export const PostsScreen = ({ route }) => {
             navigation.navigate(
               "CreatePostsScreen",
               { userData },
+              { cardPhoto },
               console.log(userData)
             )
           }>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ProfileScreen", { userData })}>
+          onPress={() =>
+            navigation.navigate("ProfileScreen", { userData }, { cardPhoto })
+          }>
           <Image
             style={styles.image}
             source={require("../assets/images/user.png")}
@@ -76,6 +98,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+  },
+  photoCard: {
+    width: "100%",
+    height: 240,
+    marginTop: 32,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerBG: {
     flexDirection: "row",
