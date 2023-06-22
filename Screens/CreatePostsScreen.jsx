@@ -76,7 +76,10 @@ export const CreatePostsScreen = ({ route }) => {
     };
     if (photoCard && name && locality) {
       // setIsLoggedIn(true);
-      navigation.navigate("PostsScreen", { userData }, { cardPhoto });
+      navigation.navigate("PostsScreen", {
+        userData: userData,
+        cardPhoto: cardPhoto,
+      });
       console.log(userData);
       console.log(cardPhoto);
     } else if (!photoCard && !name && !locality) {

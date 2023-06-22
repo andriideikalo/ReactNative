@@ -6,21 +6,30 @@ export const PostsScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userData } = route.params;
   const { cardPhoto } = route.params;
-  const itemCard = () => {
+  const renderCard = () => {
     if (cardPhoto) {
       return (
-        <View style={styles.containerCard}>
+        <View style={styles.containerСardPhoto}>
           <Image
-            style={styles.photoCard}
+            style={styles.photoCardItem}
             source={{ uri: cardPhoto.photoCard }}
           />
-          <View>
+
+          <View style={styles.cardName}>
             <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
-            <Text style={styles.cardEmail}>{cardPhoto.locality}</Text>
+
+            <Text style={styles.cardLocation}>
+              <Image
+                style={styles.icon}
+                source={require("../assets/images/map-pin.png")}
+              />
+              {cardPhoto.locality}
+            </Text>
           </View>
         </View>
       );
     }
+    return null;
   };
 
   return (
@@ -52,14 +61,13 @@ export const PostsScreen = ({ route }) => {
           <Text style={styles.cardEmail}>{userData.email}</Text>
         </View>
       </View>
-
+      {renderCard()}
       <View style={styles.btnContainer}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(
               "PostsScreen",
-              { userData },
-              { cardPhoto },
+              { userData, cardPhoto },
               console.log(userData)
             )
           }>
@@ -73,8 +81,7 @@ export const PostsScreen = ({ route }) => {
           onPress={() =>
             navigation.navigate(
               "CreatePostsScreen",
-              { userData },
-              { cardPhoto },
+              { userData, cardPhoto },
               console.log(userData)
             )
           }>
@@ -82,7 +89,7 @@ export const PostsScreen = ({ route }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("ProfileScreen", { userData }, { cardPhoto })
+            navigation.navigate("ProfileScreen", { userData, cardPhoto })
           }>
           <Image
             style={styles.image}
@@ -106,6 +113,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
+  },
+  photoCardItem: {
+    width: "100%",
+    height: 140,
+    // marginTop: 32,
   },
   containerBG: {
     flexDirection: "row",
@@ -148,6 +160,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
+
   containerCard: {
     flexDirection: "row",
     alignItems: "center",
@@ -155,6 +168,17 @@ const styles = StyleSheet.create({
     marginTop: 100,
     height: 60,
     backgroundColor: "#FFFFFF",
+  },
+  containerСardPhoto: {
+    gap: 8,
+    marginTop: 50,
+    width: "80%",
+    alignSelf: "center",
+    // alignItems: "center",
+    justifyContent: "center",
+  },
+  cardContent: {
+    gap: 8,
   },
   cardLogin: {
     color: "#212121",
@@ -167,6 +191,17 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "700",
     lineHeight: 15,
+  },
+  cardName: {
+    color: "#212121",
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 19,
+  },
+  cardLocation: {
+    color: "#212121",
+    fontSize: 16,
+    lineHeight: 19,
   },
   cardPhoto: {
     width: 60,
