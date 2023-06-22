@@ -4,7 +4,8 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { requestForegroundPermissionsAsync } from "expo-location";
 
-export const MapScreen = () => {
+export const MapScreen = ({ route }) => {
+  const { locality } = route.params;
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -14,12 +15,24 @@ export const MapScreen = () => {
         console.log("Permission to access location was denied");
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      let currentPosition = await Location.getCurrentPositionAsync({});
       const coords = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+        latitude: currentPosition.coords.latitude,
+        longitude: currentPosition.coords.longitude,
       };
       setLocation(coords);
+
+      if (locality) {
+        try {
+          const geocode = await Location.geocodeAsync(locality);
+          if (geocode.length > 0) {
+            const { latitude, longitude } = geocode[0];
+            setLocation({ latitude, longitude });
+          }
+        } catch (error) {
+          console.log("Error geocoding location:", error);
+        }
+      }
     })();
   }, []);
 
@@ -34,7 +47,7 @@ export const MapScreen = () => {
         }}
         showsUserLocation={true}>
         {location && (
-          <Marker title="I am here" coordinate={location} description="Hello" />
+          <Marker title={locality} coordinate={location} description="Hello" />
         )}
       </MapView>
     </View>

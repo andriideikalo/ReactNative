@@ -27,7 +27,11 @@ export const PostsScreen = ({ route }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconLocation}
-              onPress={() => navigation.navigate("MapScreen")}>
+              onPress={() =>
+                navigation.navigate("MapScreen", {
+                  locality: cardPhoto.locality,
+                })
+              }>
               <Image
                 style={styles.icon}
                 source={require("../assets/images/map-pin.png")}
