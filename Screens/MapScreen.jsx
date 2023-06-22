@@ -24,9 +24,9 @@ export const MapScreen = ({ route }) => {
 
       if (locality) {
         try {
-          const geocode = await Location.geocodeAsync(locality);
-          if (geocode.length > 0) {
-            const { latitude, longitude } = geocode[0];
+          const geoCode = await Location.geocodeAsync(locality);
+          if (geoCode.length > 0) {
+            const { latitude, longitude } = geoCode[0];
             setLocation({ latitude, longitude });
           }
         } catch (error) {
