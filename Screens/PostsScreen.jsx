@@ -17,14 +17,21 @@ export const PostsScreen = ({ route }) => {
 
           <View style={styles.cardName}>
             <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
-
-            <Text style={styles.cardLocation}>
+          </View>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icon}
+                source={require("../assets/images/shape.png")}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconLocation}>
               <Image
                 style={styles.icon}
                 source={require("../assets/images/map-pin.png")}
               />
-              {cardPhoto.locality}
-            </Text>
+              <Text style={styles.cardLocation}>{cardPhoto.locality}</Text>
+            </TouchableOpacity>
           </View>
         </View>
       );
@@ -176,6 +183,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // alignItems: "center",
     justifyContent: "center",
+  },
+  iconContainer: {
+    gap: 8,
+    flexDirection: "row",
+    // alignSelf: "center",
+
+    justifyContent: "space-between",
+  },
+  iconLocation: {
+    gap: 4,
+    flexDirection: "row",
   },
   cardContent: {
     gap: 8,
