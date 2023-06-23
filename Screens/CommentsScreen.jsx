@@ -29,9 +29,12 @@ export const CommentsScreen = ({ route }) => {
   };
   const handleCardComents = () => {
     if (coments) {
-      const newCommentList = [...commentList, coments];
+      const dateTime = new Date().toLocaleString();
+
+      const newCommentList = [`${coments} (${dateTime})`];
       setCommentList(newCommentList);
       console.log(coments);
+      console.log(newCommentList);
       setComents("");
     } else {
       console.log("Заповніть коментарі");
