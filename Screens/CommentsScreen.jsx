@@ -29,7 +29,7 @@ export const CommentsScreen = ({ route }) => {
       //     userData: userData,
       //     cardPhoto: cardPhoto,
       //   });
-      console.log(coments);
+      console.log(cardComents);
     } else if (!coments) {
       console.log("Заповніть коментарі");
     }
@@ -75,7 +75,7 @@ export const CommentsScreen = ({ route }) => {
         />
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => console.log(userData)}>
+          onPress={() => console.log(coments)}>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
       </View>
