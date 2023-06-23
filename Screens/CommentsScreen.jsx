@@ -18,27 +18,6 @@ export const CommentsScreen = ({ route }) => {
           <View style={styles.cardName}>
             <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
           </View>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity>
-              <Image
-                style={styles.icon}
-                source={require("../assets/images/shape.png")}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.iconLocation}
-              onPress={() =>
-                navigation.navigate("MapScreen", {
-                  locality: cardPhoto.locality,
-                })
-              }>
-              <Image
-                style={styles.icon}
-                source={require("../assets/images/map-pin.png")}
-              />
-              <Text style={styles.cardLocation}>{cardPhoto.locality}</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       );
     }
@@ -51,44 +30,9 @@ export const CommentsScreen = ({ route }) => {
         <View style={styles.containerTitle}>
           <Text style={styles.title}>Коментарі</Text>
         </View>
-        <View style={styles.containerIcon}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Image
-              style={styles.icon}
-              source={require("../assets/images/log-out.png")}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.containerCard}>
-        {userData && userData.photo ? (
-          <Image style={styles.cardPhoto} source={{ uri: userData.photo }} />
-        ) : (
-          <Image
-            style={styles.cardPhoto}
-            source={require("../assets/images/user-avatar.png")}
-          />
-        )}
-        <View>
-          <Text style={styles.cardLogin}>{userData.login}</Text>
-          <Text style={styles.cardEmail}>{userData.email}</Text>
-        </View>
       </View>
       {renderCard()}
       <View style={styles.btnContainer}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(
-              "PostsScreen",
-              { userData, cardPhoto },
-              console.log(userData)
-            )
-          }>
-          <Image
-            style={styles.image}
-            source={require("../assets/images/grid.png")}
-          />
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
           onPress={() =>
@@ -100,15 +44,6 @@ export const CommentsScreen = ({ route }) => {
           }>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("ProfileScreen", { userData, cardPhoto })
-          }>
-          <Image
-            style={styles.image}
-            source={require("../assets/images/user.png")}
-          />
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -118,14 +53,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-  },
-  photoCard: {
-    width: "100%",
-    height: 240,
-    marginTop: 32,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
   },
   photoCardItem: {
     width: "100%",
@@ -164,24 +91,12 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     paddingHorizontal: 49,
   },
-  containerIcon: {
-    alignItems: "flex-end",
-    marginRight: 16,
-    marginTop: 44,
-  },
+
   icon: {
     width: 24,
     height: 24,
   },
 
-  containerCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginTop: 100,
-    height: 60,
-    backgroundColor: "#FFFFFF",
-  },
   containerСardPhoto: {
     gap: 8,
     marginTop: 50,
@@ -189,48 +104,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // alignItems: "center",
     justifyContent: "center",
-  },
-  iconContainer: {
-    gap: 8,
-    flexDirection: "row",
-    // alignSelf: "center",
-
-    justifyContent: "space-between",
-  },
-  iconLocation: {
-    gap: 4,
-    flexDirection: "row",
-  },
-  cardContent: {
-    gap: 8,
-  },
-  cardLogin: {
-    color: "#212121",
-    fontSize: 13,
-    fontWeight: "700",
-    lineHeight: 15,
-  },
-  cardEmail: {
-    color: "#212121",
-    fontSize: 13,
-    fontWeight: "700",
-    lineHeight: 15,
-  },
-  cardName: {
-    color: "#212121",
-    fontSize: 16,
-    fontWeight: "500",
-    lineHeight: 19,
-  },
-  cardLocation: {
-    color: "#212121",
-    fontSize: 16,
-    lineHeight: 19,
-  },
-  cardPhoto: {
-    width: 60,
-    height: 60,
-    borderRadius: 16,
   },
   btnContainer: {
     flexDirection: "row",
