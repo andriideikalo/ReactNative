@@ -49,7 +49,7 @@ export const CommentsScreen = ({ route }) => {
     <View style={styles.container}>
       <View style={styles.containerBG}>
         <View style={styles.containerTitle}>
-          <Text style={styles.title}>Публікації</Text>
+          <Text style={styles.title}>Коментарі</Text>
         </View>
         <View style={styles.containerIcon}>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>

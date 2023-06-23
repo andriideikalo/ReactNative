@@ -54,6 +54,16 @@ export default function App() {
           name="MapScreen"
           component={MapScreen}
         />
+        <Stack.Screen
+          options={
+            {
+              // headerShown: false,
+              // headerTitle: "Створити публікацію",
+            }
+          }
+          name="CommentsScreen"
+          component={CommentsScreen}
+        />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
