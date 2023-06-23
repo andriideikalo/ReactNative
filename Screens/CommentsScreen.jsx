@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const CommentsScreen = ({ route }) => {
   const [isFocusedComents, setIsFocusedComents] = useState(false);
@@ -41,6 +42,28 @@ export const CommentsScreen = ({ route }) => {
       console.log("Заповніть коментарі");
     }
   };
+  const saveComments = async (commentList) => {
+    try {
+      await AsyncStorage.setItem("comments", JSON.stringify(commentList));
+    } catch (error) {
+      console.log("Error saving comments", error);
+    }
+  };
+
+  const loadComments = async () => {
+    try {
+      const savedComments = await AsyncStorage.getItem("comments");
+      if (savedComments) {
+        setCommentList(JSON.parse(savedComments));
+      }
+    } catch (error) {
+      console.log("Error loading comments", error);
+    }
+  };
+
+  useEffect(() => {
+    loadComments();
+  }, []);
 
   const renderCard = () => {
     if (cardPhoto) {
