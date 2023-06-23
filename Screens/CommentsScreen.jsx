@@ -31,7 +31,7 @@ export const CommentsScreen = ({ route }) => {
     if (coments) {
       const dateTime = new Date().toLocaleString();
 
-      const newCommentList = [`${coments} (${dateTime})`];
+      const newCommentList = [...commentList, `${coments} (${dateTime})`];
       setCommentList(newCommentList);
       console.log(coments);
       console.log(newCommentList);
