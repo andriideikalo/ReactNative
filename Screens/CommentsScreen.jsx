@@ -47,7 +47,16 @@ export const CommentsScreen = ({ route }) => {
     }
     return null;
   };
-
+  const renderComents = () => {
+    if (coments) {
+      return (
+        <View style={styles.containerComents}>
+          <Text style={styles.cardComents}>{coments}</Text>
+        </View>
+      );
+    }
+    return null;
+  };
   return (
     <View style={styles.container}>
       {/* <View style={styles.containerBG}> */}
@@ -56,6 +65,7 @@ export const CommentsScreen = ({ route }) => {
         </View>
       </View> */}
       {renderCard()}
+      {renderComents()}
       <View style={styles.btnContainer}>
         <TextInput
           placeholder="Коментувати..."
@@ -169,6 +179,20 @@ const styles = StyleSheet.create({
   textInputFocused: {
     borderColor: "#FF6C00",
     borderWidth: 1,
+  },
+  cardComents: {
+    color: "#0c0a0a",
+  },
+  containerComents: {
+    marginTop: 20,
+    backgroundColor: "#F6F6F6",
+    padding: 16,
+    gap: 8,
+    width: "80%",
+    alignSelf: "center",
+    // alignItems: "center",
+    justifyContent: "center",
+    // borderWidth: 1,
   },
 });
 
