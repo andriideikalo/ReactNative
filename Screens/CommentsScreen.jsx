@@ -63,7 +63,7 @@ export const CommentsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       {renderCard()}
-      <FlatList // Используем FlatList для отображения списка комментариев
+      <FlatList
         data={commentList}
         renderItem={renderComment}
         keyExtractor={(item, index) => index.toString()}
