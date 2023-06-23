@@ -13,7 +13,7 @@ import { TextInput } from "react-native-gesture-handler";
 export const CommentsScreen = ({ route }) => {
   const [isFocusedComents, setIsFocusedComents] = useState(false);
   const [coments, setComents] = useState("");
-  const [commentList, setCommentList] = useState([]); // Состояние для списка комментариев
+  const [commentList, setCommentList] = useState([]);
   const navigation = useNavigation();
   const { userData } = route.params;
   const { cardPhoto } = route.params;
@@ -29,7 +29,7 @@ export const CommentsScreen = ({ route }) => {
   };
   const handleCardComents = () => {
     if (coments) {
-      const newCommentList = [...commentList, coments]; // Добавляем новый комментарий в список
+      const newCommentList = [...commentList, coments];
       setCommentList(newCommentList);
       console.log(coments);
       setComents("");
@@ -81,7 +81,12 @@ export const CommentsScreen = ({ route }) => {
           onBlur={handleBlurComents}
         />
         <TouchableOpacity style={styles.btn} onPress={handleCardComents}>
-          <Text style={styles.btnText}>+</Text>
+          {/* <Text style={styles.btnText}> */}
+          <Image
+            style={styles.icon}
+            source={require("../assets/images/vector.png")}
+          />
+          {/* </Text> */}
         </TouchableOpacity>
       </View>
     </View>
@@ -132,8 +137,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 24,
-    height: 24,
+    width: 10,
+    height: 14,
   },
 
   containerСardPhoto: {
@@ -165,11 +170,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 24,
   },
-  btnText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "400",
-  },
+
   textInput: {
     padding: 16,
     backgroundColor: "#F6F6F6",
