@@ -24,16 +24,11 @@ export const CommentsScreen = ({ route }) => {
       coments,
     };
     if (coments) {
-      // setIsLoggedIn(true);
-      //   navigation.navigate("PostsScreen", {
-      //     userData: userData,
-      //     cardPhoto: cardPhoto,
-      //   });
-      console.log(cardComents);
+      console.log(coments);
     } else if (!coments) {
       console.log("Заповніть коментарі");
     }
-    setСoments("");
+    setComents("");
   };
   const renderCard = () => {
     if (cardPhoto) {
