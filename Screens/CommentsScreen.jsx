@@ -39,7 +39,7 @@ export const CommentsScreen = ({ route }) => {
       console.log(newCommentList.length);
       setComents("");
       navigation.navigate("PostsScreen", {
-        newCommentList: { newCommentList },
+        countComents: newCommentList.length,
         userData,
       });
     } else {
