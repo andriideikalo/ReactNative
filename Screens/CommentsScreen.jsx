@@ -38,6 +38,10 @@ export const CommentsScreen = ({ route }) => {
       console.log(newCommentList);
       console.log(newCommentList.length);
       setComents("");
+      navigation.navigate("PostsScreen", {
+        newCommentList: { newCommentList },
+        userData,
+      });
     } else {
       console.log("Заповніть коментарі");
     }

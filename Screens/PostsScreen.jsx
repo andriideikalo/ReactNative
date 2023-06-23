@@ -6,6 +6,7 @@ export const PostsScreen = ({ route }) => {
   const navigation = useNavigation();
   const { userData } = route.params;
   const { cardPhoto } = route.params;
+  const { newCommentList } = route.params;
   const renderCard = () => {
     if (cardPhoto) {
       return (
@@ -30,6 +31,7 @@ export const PostsScreen = ({ route }) => {
                 style={styles.icon}
                 source={require("../assets/images/shape.png")}
               />
+              <Text>`${newCommentList}`</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconLocation}
