@@ -35,6 +35,7 @@ export const CommentsScreen = ({ route }) => {
       setCommentList(newCommentList);
       console.log(coments);
       console.log(newCommentList);
+      console.log(newCommentList.length);
       setComents("");
     } else {
       console.log("Заповніть коментарі");
