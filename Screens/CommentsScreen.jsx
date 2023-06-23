@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 
 export const CommentsScreen = ({ route }) => {
   const [isFocusedComents, setIsFocusedComents] = useState(false);
   const [coments, setComents] = useState("");
+  const [commentList, setCommentList] = useState([]); // Состояние для списка комментариев
   const navigation = useNavigation();
   const { userData } = route.params;
   const { cardPhoto } = route.params;
@@ -20,16 +28,16 @@ export const CommentsScreen = ({ route }) => {
     setComents(text);
   };
   const handleCardComents = () => {
-    const cardComents = {
-      coments,
-    };
     if (coments) {
+      const newCommentList = [...commentList, coments]; // Добавляем новый комментарий в список
+      setCommentList(newCommentList);
       console.log(coments);
-    } else if (!coments) {
+      setComents("");
+    } else {
       console.log("Заповніть коментарі");
     }
-    setComents("");
   };
+
   const renderCard = () => {
     if (cardPhoto) {
       return (
@@ -38,34 +46,28 @@ export const CommentsScreen = ({ route }) => {
             style={styles.photoCardItem}
             source={{ uri: cardPhoto.photoCard }}
           />
+        </View>
+      );
+    }
+    return null;
+  };
 
-          {/* <View style={styles.cardName}>
-            <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
-          </View> */}
-        </View>
-      );
-    }
-    return null;
+  const renderComment = ({ item }) => {
+    return (
+      <View style={styles.containerComents}>
+        <Text style={styles.cardComents}>{item}</Text>
+      </View>
+    );
   };
-  const renderComents = () => {
-    if (coments) {
-      return (
-        <View style={styles.containerComents}>
-          <Text style={styles.cardComents}>{coments}</Text>
-        </View>
-      );
-    }
-    return null;
-  };
+
   return (
     <View style={styles.container}>
-      {/* <View style={styles.containerBG}> */}
-      {/* <View style={styles.containerTitle}>
-          <Text style={styles.title}>Коментарі</Text>
-        </View>
-      </View> */}
       {renderCard()}
-      {renderComents()}
+      <FlatList // Используем FlatList для отображения списка комментариев
+        data={commentList}
+        renderItem={renderComment}
+        keyExtractor={(item, index) => index.toString()}
+      />
       <View style={styles.btnContainer}>
         <TextInput
           placeholder="Коментувати..."
@@ -78,9 +80,7 @@ export const CommentsScreen = ({ route }) => {
           onFocus={handleFocusComents}
           onBlur={handleBlurComents}
         />
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => console.log(coments)}>
+        <TouchableOpacity style={styles.btn} onPress={handleCardComents}>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
       </View>
