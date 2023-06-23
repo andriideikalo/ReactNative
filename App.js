@@ -7,6 +7,7 @@ import { PostsScreen } from "./Screens/PostsScreen";
 import { ProfileScreen } from "./Screens/ProfileScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 import { MapScreen } from "./Screens/MapScreen";
+import { CommentsScreen } from "./Screens/CommentsScreen";
 
 const Stack = createStackNavigator();
 

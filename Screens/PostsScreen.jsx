@@ -19,7 +19,13 @@ export const PostsScreen = ({ route }) => {
             <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
           </View>
           <View style={styles.iconContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("CommentsScreen", {
+                  userData,
+                  cardPhoto,
+                })
+              }>
               <Image
                 style={styles.icon}
                 source={require("../assets/images/shape.png")}
