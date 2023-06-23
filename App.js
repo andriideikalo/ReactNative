@@ -56,12 +56,10 @@ export default function App() {
           component={MapScreen}
         />
         <Stack.Screen
-          options={
-            {
-              // headerShown: false,
-              // headerTitle: "Створити публікацію",
-            }
-          }
+          options={{
+            // headerShown: false,
+            headerTitle: "Коментарі",
+          }}
           name="CommentsScreen"
           component={CommentsScreen}
         />

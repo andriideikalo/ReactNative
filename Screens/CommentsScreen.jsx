@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { TextInput } from "react-native-gesture-handler";
 
 export const CommentsScreen = ({ route }) => {
+  const [isFocusedComents, setIsFocusedComents] = useState(false);
+  const [coments, setComents] = useState("");
   const navigation = useNavigation();
   const { userData } = route.params;
   const { cardPhoto } = route.params;
+  const handleFocusComents = () => {
+    setIsFocusedComents(true);
+  };
+
+  const handleBlurComents = () => {
+    setIsFocusedComents(false);
+  };
+  const handleComentsChange = (text) => {
+    setComents(text);
+  };
+  const handleCardComents = () => {
+    const cardComents = {
+      coments,
+    };
+    if (coments) {
+      // setIsLoggedIn(true);
+      //   navigation.navigate("PostsScreen", {
+      //     userData: userData,
+      //     cardPhoto: cardPhoto,
+      //   });
+      console.log(coments);
+    } else if (!coments) {
+      console.log("Заповніть коментарі");
+    }
+    setСoments("");
+  };
   const renderCard = () => {
     if (cardPhoto) {
       return (
@@ -15,9 +44,9 @@ export const CommentsScreen = ({ route }) => {
             source={{ uri: cardPhoto.photoCard }}
           />
 
-          <View style={styles.cardName}>
+          {/* <View style={styles.cardName}>
             <Text style={styles.cardLogin}>{cardPhoto.name}</Text>
-          </View>
+          </View> */}
         </View>
       );
     }
@@ -26,22 +55,27 @@ export const CommentsScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerBG}>
-        <View style={styles.containerTitle}>
+      {/* <View style={styles.containerBG}> */}
+      {/* <View style={styles.containerTitle}>
           <Text style={styles.title}>Коментарі</Text>
         </View>
-      </View>
+      </View> */}
       {renderCard()}
       <View style={styles.btnContainer}>
+        <TextInput
+          placeholder="Коментувати..."
+          style={[
+            styles.textInput,
+            isFocusedComents && styles.textInputFocused,
+          ]}
+          value={coments}
+          onChangeText={handleComentsChange}
+          onFocus={handleFocusComents}
+          onBlur={handleBlurComents}
+        />
         <TouchableOpacity
           style={styles.btn}
-          onPress={() =>
-            navigation.navigate(
-              "CreatePostsScreen",
-              { userData, cardPhoto },
-              console.log(userData)
-            )
-          }>
+          onPress={() => console.log(userData)}>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
       </View>
@@ -99,20 +133,19 @@ const styles = StyleSheet.create({
 
   containerСardPhoto: {
     gap: 8,
-    marginTop: 50,
     width: "80%",
     alignSelf: "center",
-    // alignItems: "center",
+    alignItems: "center",
     justifyContent: "center",
   },
   btnContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     position: "absolute",
     bottom: 0,
-    left: 89,
-    right: 89,
-    alignItems: "center",
+    // left: 24,
+    // right: 24,
+    // alignItems: "center",
     marginBottom: 16,
   },
   btn: {
@@ -122,13 +155,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 13,
     paddingHorizontal: 13,
-    width: 70,
+    width: 50,
     alignSelf: "center",
+    position: "absolute",
+    right: 24,
   },
   btnText: {
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "400",
+  },
+  textInput: {
+    padding: 16,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 8,
+    width: "100%",
+  },
+  textInputFocused: {
+    borderColor: "#FF6C00",
+    borderWidth: 1,
   },
 });
 
