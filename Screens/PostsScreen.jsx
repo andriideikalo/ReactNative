@@ -201,7 +201,6 @@ const styles = StyleSheet.create({
   iconContainer: {
     gap: 8,
     flexDirection: "row",
-    // alignSelf: "center",
 
     justifyContent: "space-between",
   },
