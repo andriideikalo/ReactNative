@@ -56,7 +56,6 @@ export default function App() {
         />
         <Stack.Screen
           options={{
-            // headerShown: false,
             headerTitle: "Коментарі",
           }}
           name="CommentsScreen"
