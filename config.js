@@ -23,3 +23,11 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+// /Firebase на вкладці Database
+// {
+//   "rules": {
+//     ".read": "now < 1690318800000",  // 2023-7-26
+//     ".write": "now < 1690318800000",  // 2023-7-26
+//   }
+// }
