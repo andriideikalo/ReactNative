@@ -8,7 +8,7 @@ import { ProfileScreen } from "./Screens/ProfileScreen";
 import { CreatePostsScreen } from "./Screens/CreatePostsScreen";
 import { MapScreen } from "./Screens/MapScreen";
 import { CommentsScreen } from "./Screens/CommentsScreen";
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
 import store from "./redux/store";
 
 const Stack = createStackNavigator();
